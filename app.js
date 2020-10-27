@@ -37,7 +37,7 @@ function mainMenu(person, people){
 
   switch(displayOption){
     case "info":
-    // TODO: get person's info
+    displayPerson(person);
     break;
     case "family":
     // TODO: get person's family
@@ -71,6 +71,30 @@ function searchByName(people){
   return foundPerson[0];
 }
 
+function searchByTraits(people){
+    let searchArray =[];
+    let displayOption = prompt("Please enter: 'gender', 'eye color', 'dob', 'height' or 'weight'? Type the option you want or 'restart' or 'quit'");
+
+  switch(displayOption){
+    case "gender":
+    let gender = prompt("enter 'male' or 'female")
+    searchArray = 
+    break;
+    case "eye color":
+    let eyeColor = prompt("enter eye color")
+    break;
+    case "dob":
+    let dob = prompt("enter dob as 00/00/0000")
+    break;
+    case "height":
+    let height = prompt("enter height in inches")
+    break;
+    case "weight":
+    let weight = prompt("enter weight in LBS")
+    default:
+    return mainMenu(person, people); // ask again
+}
+
 // alerts a list of people
 function displayPeople(people){
   alert(people.map(function(person){
@@ -83,7 +107,8 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
-  // TODO: finish getting the rest of the information to display
+  personInfo += "Gender: " + person.gender + "\n";
+  
   alert(personInfo);
 }
 
