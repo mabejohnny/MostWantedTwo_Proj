@@ -43,7 +43,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    // TODO: get person's descendants
+    displayDescendants(person, people)
     break;
     case "restart":
     app(people); // restart
@@ -78,7 +78,7 @@ function searchByTraits(people){
   switch(displayOption){
     case "gender":
     let gender = prompt("enter 'male' or 'female")
-    searchArray = 
+    
     break;
     case "eye color":
     let eyeColor = prompt("enter eye color")
@@ -107,7 +107,13 @@ function displayPerson(person){
   // height, weight, age, name, occupation, eye color.
   let personInfo = "First Name: " + person.firstName + "\n";
   personInfo += "Last Name: " + person.lastName + "\n";
+  personInfo += "Weight: " + person.weight + "\n";
+  personInfo += "Height: " + person.height + "\n";
+  personInfo += "Eye Color: " + person.eyeColor + "\n";
+  personInfo += "Age: " + person.age + "\n";
   personInfo += "Gender: " + person.gender + "\n";
+  personInfo += "Occupation: " + person.occupation + "\n";
+
   
   alert(personInfo);
 }
@@ -128,4 +134,46 @@ function yesNo(input){
 // helper function to pass in as default promptFor validation
 function chars(input){
   return true; // default validation only
+}
+
+
+function displayDescendants(person, people) {
+    let descendants = getDescendants(person, people)
+
+    if(descendants.length === 0) {
+        alert("There are no descendants for " + person);
+    }
+    app(people);
+}
+function findDescendants(person, people) {
+
+    let descendant = getDescendants(people, person)
+    let descendantsToReturn = "";
+    
+    for(let i = 0; i <descendants.length; i++){
+        descendantsToReturn += descendants[i].firstName + descendants[i].lastName;
+    }
+
+    return descendantsToReturn; 
+
+}
+
+function getDescendants(person, people, findDescendants){
+    
+    
+    descendants = people.filter(function (element) {
+
+        if(element.parents.length === 0) {
+            return false;
+    
+        }
+        else if(element.parents.includes(person.id)){
+            return true;
+        }
+    
+    });
+    findDescendants();
+    return descendants;
+      
+}
 }
