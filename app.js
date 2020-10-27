@@ -43,7 +43,8 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    displayDescendants(person, people)
+    findDescendants(person, people)
+    displayDescendants();
     break;
     case "restart":
     app(people); // restart
@@ -75,24 +76,25 @@ function searchByTraits(people){
     let searchArray =[];
     let displayOption = prompt("Please enter: 'gender', 'eye color', 'dob', 'height' or 'weight'? Type the option you want or 'restart' or 'quit'");
 
-  switch(displayOption){
-    case "gender":
-    let gender = prompt("enter 'male' or 'female")
+    switch(displayOption){
+        case "gender":
+        let gender = prompt("enter 'male' or 'female")
     
-    break;
-    case "eye color":
-    let eyeColor = prompt("enter eye color")
-    break;
-    case "dob":
-    let dob = prompt("enter dob as 00/00/0000")
-    break;
-    case "height":
-    let height = prompt("enter height in inches")
-    break;
-    case "weight":
-    let weight = prompt("enter weight in LBS")
-    default:
-    return mainMenu(person, people); // ask again
+        break;
+        case "eye color":
+        let eyeColor = prompt("enter eye color")
+        break;
+        case "dob":
+        let dob = prompt("enter dob as 00/00/0000")
+        break;
+        case "height":
+        let height = prompt("enter height in inches")
+        break;
+        case "weight":
+        let weight = prompt("enter weight in LBS")
+        default:
+        return mainMenu(person, people); //ask agin
+    }
 }
 
 // alerts a list of people
@@ -137,43 +139,48 @@ function chars(input){
 }
 
 
-function displayDescendants(person, people) {
-    let descendants = getDescendants(person, people)
-
-    if(descendants.length === 0) {
-        alert("There are no descendants for " + person);
-    }
-    app(people);
-}
-function findDescendants(person, people) {
-
-    let descendant = getDescendants(people, person)
-    let descendantsToReturn = "";
-    
-    for(let i = 0; i <descendants.length; i++){
-        descendantsToReturn += descendants[i].firstName + descendants[i].lastName;
-    }
-
-    return descendantsToReturn; 
-
-}
-
-function getDescendants(person, people, findDescendants){
-    
-    
+function findDescendants(person) {
+   
+    let descendants = [];
     descendants = people.filter(function (element) {
 
         if(element.parents.length === 0) {
-            return false;
-    
+            return false; 
+
         }
-        else if(element.parents.includes(person.id)){
+        else if(element.parents.includes(person.id)){    
             return true;
-        }
-    
+        }  
     });
-    findDescendants();
-    return descendants;
+
+    let peopleToReturn = [];
+    for(let i = 0; i <descendants.length; i++) {
+        peopleToReturn += descendants[i].firstName + " " + descendants[i].lastName + " ";
+
+        if(peopleToReturn > 0) {
+            let grandKids = findDescendants(peopleToReturn)
+            descendantsToReturn += grandKids;
+        }
+        else if(peopleToReturn === 0){
+            break; 
+        }
+   
+    }
+    return peopleToReturn
+}
+
+
+function displayDescendants(peopleToReturn){
+     if(peopleToReturn === 0) {
+            alert("There are no descendants for " + person);
+            app(people);
+        }
+    else{
+        alert(peopleToReturn);
+    }
+}
+
+
+
+
       
-}
-}
