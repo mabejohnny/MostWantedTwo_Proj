@@ -138,6 +138,43 @@ function chars(input){
   return true; // default validation only
 }
 
+function findFamilyMembersOfPerson(person, people) {
+  let parents = findParentsOfPerson(person, People);
+  let spouse = findSpouseOfPerson(person, people);
+  let siblings = findSiblingsOfPerson(person,people);
+  displayFamily(spouse, parents, siblings);
+}
+
+function findParentsOfPerson(person, people) {
+  let parents = people.filter(function (element) {
+    if(person.parents[0] == element.id) {
+      return true;
+    }
+    else{
+      return false;
+    }
+  });
+  return parents; 
+
+}
+
+function findSpouseOfPerson(person, people) {
+  let spouse = people.filter(function (element) {
+    if(person.spouse[0] == element.id) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  });
+  return spouse; 
+}
+
+
+
+
+
+
 
 
 function findDescendants(person, people) {
