@@ -95,12 +95,12 @@ function searchByTraits(people){
         case "height":
         let heightChoice = prompt("enter height in inches")
         let height = "height";
-        searchArray = searchBySingleTrait(heightChoice, people, height);
+        searchArray = searchByMathTrait(heightChoice, people, height);
         break;
         case "weight":
         let weightChoice = prompt("enter weight in LBS")
         let weight = "weight";
-        searchArray = searchBySingleTrait(weightChoice, people, weight);
+        searchArray = searchByMathTrait(weightChoice, people, weight);
         default:
           return searchByTraits(searchArray);
     }
@@ -108,7 +108,7 @@ function searchByTraits(people){
     return searchBySingleTrait(searchArray);
 }
 
-function searchBySingleTrait(displayOption, people, singleTrait) {
+function searchBySingleTrait(displayOption, people, singleTrait){
   let foundTraits = people.filter(function(person){
     if(person[`${singleTrait}`] === displayOption) {
       return true;
@@ -117,7 +117,20 @@ function searchBySingleTrait(displayOption, people, singleTrait) {
       return false;
     }
   })
-  return foundTraits;
+  return foundTraits; 
+}
+
+function searchByMathTrait(displayOption, people, singleTrait){
+  let foundTraits = people.filter(function(person){
+    if(person[`${singleTrait}`] === parseInt(displayOption)) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  
+  return foundTraits; 
 }
 
 function displayPeopleWithTraits(people) {
