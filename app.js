@@ -79,7 +79,7 @@ function searchByTraits(people){
     switch(displayOption){
         case "gender":
         let gender = prompt("enter 'male' or 'female")
-    
+       searchArray = searchByTrait(people, eyeColor, eyeColorChoice)
         break;
         case "eye color":
         let eyeColor = prompt("enter eye color")
@@ -139,7 +139,7 @@ function chars(input){
 }
 
 
-function findDescendants(person) {
+function findDescendants(person, people) {
    
     let descendants = [];
     descendants = people.filter(function (element) {
@@ -153,22 +153,20 @@ function findDescendants(person) {
         }  
     });
 
-    let peopleToReturn = [];
     for(let i = 0; i <descendants.length; i++) {
-        peopleToReturn += descendants[i].firstName + " " + descendants[i].lastName + " ";
-
+      let peopleToReturn = [];
+      peopleToReturn += descendants[i].firstName + " " + descendants[i].lastName + " ";
         if(peopleToReturn > 0) {
-            let grandKids = findDescendants(peopleToReturn)
-            descendantsToReturn += grandKids;
+          findDescendants(peopleToReturn[i], peopleToReturn)
         }
-        else if(peopleToReturn === 0){
-            break; 
-        }
-   
-    }
-    return peopleToReturn
-}
+        else if(peopleToReturn === 0) {
+           break;
 
+         }
+
+    }
+   
+}
 
 function displayDescendants(peopleToReturn){
      if(peopleToReturn === 0) {
