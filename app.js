@@ -40,7 +40,7 @@ function mainMenu(person, people){
     displayPerson(person);
     break;
     case "family":
-    // TODO: get person's family
+    findFamilyMembersOfPerson(person, people)
     break;
     case "descendants":
     var allDecendants = findDescendants(person, people);
@@ -80,30 +80,56 @@ function searchByTraits(people){
         case "gender":
         let genderChoice = prompt("enter 'male' or 'female")
         let gender ="gender";
-       searchArray = searchByTrait(genderChoice, people, gender);
+       searchArray = searchBySingleTrait(genderChoice, people, gender);
         break;
         case "eye color":
         let eyeColorChoice = prompt("enter eye color")
         let eyeColor = "eyeColor";
-        searchArray = searchByTrait(people, eyeColor, eyeColorChoice);
+        searchArray = searchBySingleTrait(people, eyeColor, eyeColorChoice);
         break;
         case "dob":
         let dobChoice = prompt("enter dob as 00/00/0000")
         let dob = "dob";
-        searchArray = searchByTrait(dobChoice, people, dob);
+        searchArray = searchBySingleTrait(dobChoice, people, dob);
         break;
         case "height":
         let heightChoice = prompt("enter height in inches")
         let height = "height";
-        searchArray = searchByTrait(heightChoice, people, height);
+        searchArray = searchBySingleTrait(heightChoice, people, height);
         break;
         case "weight":
         let weightChoice = prompt("enter weight in LBS")
         let weight = "weight";
-        searchArray = searchByTrait(weightChoice, people, weight);
+        searchArray = searchBySingleTrait(weightChoice, people, weight);
         default:
-        return mainMenu(person, people); //ask agin
+          return searchByTraits(searchArray);
     }
+    displayPeopleWithTraits(searchArray);
+    return searchByTrait(searchArray);
+}
+
+function searchBySingleTrait(displayOption, people, singleTrait) {
+  let foundTraits = people.filter(function(person){
+    if(person[`${singleTrait}`] === displayOption) {
+      return true;
+    }
+    else {
+      return false;
+    }
+  })
+  return foundTraits;
+}
+
+function displayPeopleWithTraits(people) {
+  alert(people.map(function(person) {
+    return person.firstName + "\n" +
+    person.lastName + "\n" +
+    person.gender + "\n" +
+    person.dob + "\n" +
+    person.height + "\n" +
+    person.weight + "\n" +
+    person.gender + "\n";
+  }).join("\n"));
 }
 
 // alerts a list of people
@@ -258,12 +284,10 @@ function findDescendants(person, people) {
 
 function displayDescendants(allDecendants){
 
-    allDecendants.forEach(element => {
-      
-      alert(JSON.stringify(element.firstName + " " + element.lastName));
-      
-    });
-  
+  alert(allDecendants.map(function(person){
+    return person.firstName + " " + person.lastName;
+  }).join("\n"));
+    
 }
 
 
