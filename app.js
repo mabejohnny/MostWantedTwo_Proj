@@ -78,20 +78,29 @@ function searchByTraits(people){
 
     switch(displayOption){
         case "gender":
-        let gender = prompt("enter 'male' or 'female")
-       searchArray = searchByTrait(people, eyeColor, eyeColorChoice)
+        let genderChoice = prompt("enter 'male' or 'female")
+        let gender ="gender";
+       searchArray = searchByTrait(genderChoice, people, gender);
         break;
         case "eye color":
-        let eyeColor = prompt("enter eye color")
+        let eyeColorChoice = prompt("enter eye color")
+        let eyeColor = "eyeColor";
+        searchArray = searchByTrait(people, eyeColor, eyeColorChoice);
         break;
         case "dob":
-        let dob = prompt("enter dob as 00/00/0000")
+        let dobChoice = prompt("enter dob as 00/00/0000")
+        let dob = "dob";
+        searchArray = searchByTrait(dobChoice, people, dob);
         break;
         case "height":
-        let height = prompt("enter height in inches")
+        let heightChoice = prompt("enter height in inches")
+        let height = "height";
+        searchArray = searchByTrait(heightChoice, people, height);
         break;
         case "weight":
-        let weight = prompt("enter weight in LBS")
+        let weightChoice = prompt("enter weight in LBS")
+        let weight = "weight";
+        searchArray = searchByTrait(weightChoice, people, weight);
         default:
         return mainMenu(person, people); //ask agin
     }
@@ -115,9 +124,12 @@ function displayPerson(person){
   personInfo += "Age: " + person.age + "\n";
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
+  personInfo += "DOB: " + person.dob + "\n";
+  
 
   
   alert(personInfo);
+  app(people);
 }
 
 // function that prompts and validates user input
