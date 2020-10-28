@@ -233,7 +233,7 @@ function findSiblingsOfPerson(person, people) {
       }
       else if(element.parents.length >=1){    
         
-        if(element.parents.id === person.parents.id ){
+        if(element.parents[0] === person.parents[0] ){
           return true; 
         }
         else{
