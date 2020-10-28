@@ -166,15 +166,59 @@ function findSpouseOfPerson(person, people) {
     else {
       return false;
     }
-  });
+  })
   return spouse; 
 }
 
+function findSiblingsOfPerson(person, people) {
+  let siblings = [];
 
+  if(parents.length == 0) {
+    return siblings;
+  }
+  else if(parents.length >=1) {
+    siblings = people.filter(function (element) {
 
+      if(element.parents.length == 0) {
+        return false;
+      }
+      else if(element.parents.length == 1 && parents.length == 1) {
+        if(element.parents[0] === parents[0].id) {
+          return true;
+        }
+        else{
+          return false;
+        }
+      }
 
+    })
+  }
+}
 
-
+function displayFamily(spouse, parents, siblings, person) {
+  if(spouse.gender == "male") {
+    alert(`${person.firstName} ${person.lastName} husband is ${spouse.firstName} ${spouse.lastName}`)
+  }
+  else{
+    alert(`${person.firstName} ${person.lastName} wife is ${spouse.firstName} ${spouse.lastName}`)
+  }
+  parents.forEach(element => {
+    if(element.gender === "male") {
+      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} father`)
+    }
+    else{
+      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} mother`)
+    }
+})
+siblings.forEach(element => {
+  if(element.gender === "male") {
+    alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} brother`)
+  }
+  else{
+    alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} sister`)
+  }
+})
+}
 
 
 function findDescendants(person, people) {
