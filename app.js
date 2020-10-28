@@ -43,7 +43,7 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    let allDecendants = findDescendants(person, people);
+    var allDecendants = findDescendants(person, people);
     displayDescendants(allDecendants);
     break;
     case "restart":
@@ -139,6 +139,7 @@ function chars(input){
 }
 
 
+
 function findDescendants(person, people) {
    
     let descendants = [];
@@ -162,21 +163,14 @@ function findDescendants(person, people) {
     return descendants;   
 }
 
-function displayDescendants(allDecendants, people, person){
+function displayDescendants(allDecendants){
 
-    for(let i = 0; i <allDecendants.length; i++) {
-
-      if(allDecendants === 0) {
-        alert("No descendants found")
-      }
-      else{
-        alert(JSON.stringify(allDecendant));
-
-      }
+    allDecendants.forEach(element => {
       
-    }
+      alert(JSON.stringify(element.firstName + " " + element.lastName));
+      
+    });
   
-    
 }
 
 
