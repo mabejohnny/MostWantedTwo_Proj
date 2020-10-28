@@ -43,8 +43,8 @@ function mainMenu(person, people){
     // TODO: get person's family
     break;
     case "descendants":
-    findDescendants(person, people)
-    displayDescendants();
+    let allDecendants = findDescendants(person, people);
+    displayDescendants(allDecendants);
     break;
     case "restart":
     app(people); // restart
@@ -154,28 +154,29 @@ function findDescendants(person, people) {
     });
 
     for(let i = 0; i <descendants.length; i++) {
-      let peopleToReturn = [];
-      peopleToReturn += descendants[i].firstName + " " + descendants[i].lastName + " ";
-        if(peopleToReturn > 0) {
-          findDescendants(peopleToReturn[i], peopleToReturn)
-        }
-        else if(peopleToReturn === 0) {
-           break;
+     
+       let grandKids = findDescendants(descendants[i], people);
+        descendants = descendants.concat(grandKids); 
 
-         }
-
-    }
-   
+    } 
+    return descendants;   
 }
 
-function displayDescendants(peopleToReturn){
-     if(peopleToReturn === 0) {
-            alert("There are no descendants for " + person);
-            app(people);
-        }
-    else{
-        alert(peopleToReturn);
+function displayDescendants(allDecendants, people, person){
+
+    for(let i = 0; i <allDecendants.length; i++) {
+
+      if(allDecendants === 0) {
+        alert("No descendants found")
+      }
+      else{
+        alert(JSON.stringify(allDecendant));
+
+      }
+      
     }
+  
+    
 }
 
 
