@@ -101,8 +101,13 @@ function searchByTraits(people){
         let weightChoice = prompt("enter weight in LBS")
         let weight = "weight";
         searchArray = searchByMathTrait(weightChoice, people, weight);
+        case "quit":
+        app(people);
+        case "restart":
+        searchByTraits(searchArray);;
         default:
-          return searchByTraits(searchArray);
+        alert("Error, please try again");
+        return searchByTraits(searchArray);
     }
     displayPeopleWithTraits(searchArray);
     return searchBySingleTrait(searchArray);
@@ -114,7 +119,8 @@ function searchBySingleTrait(displayOption, people, singleTrait){
       return true;
     }
     else {
-      return false;
+      alert("Error")
+      searchByTraits(people);
     }
   })
   return foundTraits; 
@@ -129,20 +135,19 @@ function searchByMathTrait(displayOption, people, singleTrait){
       return false;
     }
   })
-  
   return foundTraits; 
 }
 
 function displayPeopleWithTraits(people) {
   alert(people.map(function(person) {
-    return person.firstName + "\n" +
-    person.lastName + "\n" +
-    person.gender + "\n" +
-    person.eyeColor + "\n" +
-    person.dob + "\n" +
-    person.height + "\n" +
-    person.weight + "\n" +
-    person.occupation + "\n";
+    return "First Name: " + person.firstName + "\n" +
+    "Last Name: " + person.lastName + "\n" +
+    "Gender: " + person.gender + "\n" +
+    "Eye Color: " + person.eyeColor + "\n" +
+    "D.O.B: " +person.dob + "\n" +
+    "Height(in): " + person.height + "\n" +
+    "Weight(Lbs): " + person.weight + "\n" +
+    "Occcupation: " + person.occupation + "\n";
   }).join("\n"));
 }
 
@@ -165,8 +170,6 @@ function displayPerson(person){
   personInfo += "Gender: " + person.gender + "\n";
   personInfo += "Occupation: " + person.occupation + "\n";
   personInfo += "DOB: " + person.dob + "\n";
-  
-
   
   alert(personInfo);
   app(people);
@@ -207,7 +210,6 @@ function findParentsOfPerson(person, people) {
     }
   });
   return parents; 
-
 }
 
 function findSpouseOfPerson(person, people) {
@@ -221,8 +223,7 @@ function findSpouseOfPerson(person, people) {
   }); 
   return spouse[0]; 
 }
-//creating array to hold what we find
-//
+
 function findSiblingsOfPerson(person, people) {
   let siblings = [];
   siblings = people.filter(function (element) {
@@ -238,11 +239,9 @@ function findSiblingsOfPerson(person, people) {
         }
         else{
           return false; 
-        }  
-         
+        }     
       }  
   });
-
   return siblings;   
 }
 
@@ -250,29 +249,28 @@ function findSiblingsOfPerson(person, people) {
 
 function displayFamily(spouse, parents, person, siblings) {
   if(spouse.gender == "male") {
-    alert(`${person.firstName} ${person.lastName} husband is ${spouse.firstName} ${spouse.lastName}`)
+    alert(`${person.firstName} ${person.lastName}'s husband is ${spouse.firstName} ${spouse.lastName}`)
   }
   else{
-    alert(`${person.firstName} ${person.lastName} wife is ${spouse.firstName} ${spouse.lastName}`)
+    alert(`${person.firstName} ${person.lastName}'s wife is ${spouse.firstName} ${spouse.lastName}`)
   }
   parents.forEach(element => {
     if(element.gender === "male") {
-      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} father`)
+      alert(`${element.firstName} ${element.lastName}'s is ${person.firstName} ${person.lastName} father`)
     }
     else{
-      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} mother`)
+      alert(`${element.firstName} ${element.lastName}'s is ${person.firstName} ${person.lastName} mother`)
     }
 })
   siblings.forEach(element => {
     if(element.gender === "male") {
-     alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} brother`)
+     alert(`${element.firstName} ${element.lastName}'s is ${person.firstName} ${person.lastName} brother`)
    }
     else{
-      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} sister`)
+      alert(`${element.firstName} ${element.lastName}'s is ${person.firstName} ${person.lastName} sister`)
     }
 }) 
 }
-
 
 function findDescendants(person, people) {
    
@@ -292,7 +290,6 @@ function findDescendants(person, people) {
      
        let grandKids = findDescendants(descendants[i], people);
         descendants = descendants.concat(grandKids); 
-
     } 
     return descendants;   
 }
@@ -300,9 +297,8 @@ function findDescendants(person, people) {
 function displayDescendants(allDecendants){
 
   alert(allDecendants.map(function(person){
-    return person.firstName + " " + person.lastName;
-  }).join("\n"));
-    
+    return "Name: " + person.firstName + " " + person.lastName;
+  }).join("\n"));   
 }
 
 
