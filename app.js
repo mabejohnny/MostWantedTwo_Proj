@@ -85,7 +85,7 @@ function searchByTraits(people){
         case "eye color":
         let eyeColorChoice = prompt("enter eye color")
         let eyeColor = "eyeColor";
-        searchArray = searchBySingleTrait(people, eyeColor, eyeColorChoice);
+        searchArray = searchBySingleTrait(eyeColorChoice, people, eyeColor);
         break;
         case "dob":
         let dobChoice = prompt("enter dob as 00/00/0000")
@@ -105,7 +105,7 @@ function searchByTraits(people){
           return searchByTraits(searchArray);
     }
     displayPeopleWithTraits(searchArray);
-    return searchByTrait(searchArray);
+    return searchBySingleTrait(searchArray);
 }
 
 function searchBySingleTrait(displayOption, people, singleTrait) {
@@ -125,10 +125,11 @@ function displayPeopleWithTraits(people) {
     return person.firstName + "\n" +
     person.lastName + "\n" +
     person.gender + "\n" +
+    person.eyeColor + "\n" +
     person.dob + "\n" +
     person.height + "\n" +
     person.weight + "\n" +
-    person.gender + "\n";
+    person.occupation + "\n";
   }).join("\n"));
 }
 
