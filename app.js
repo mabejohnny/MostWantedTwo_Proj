@@ -194,7 +194,7 @@ function findFamilyMembersOfPerson(person, people) {
   let parents = findParentsOfPerson(person, people);
   let spouse = findSpouseOfPerson(person, people);
   let siblings = findSiblingsOfPerson(person,people);
-  displayFamily(spouse, parents, siblings);
+  displayFamily(spouse, parents, person, siblings);
 }
 
 function findParentsOfPerson(person, people) {
@@ -221,33 +221,34 @@ function findSpouseOfPerson(person, people) {
   }); 
   return spouse[0]; 
 }
-
+//creating array to hold what we find
+//
 function findSiblingsOfPerson(person, people) {
   let siblings = [];
+  siblings = people.filter(function (element) {
 
-  if(parents.length == 0) {
-    return siblings;
-  }
-  else if(parents.length >=1) {
-    siblings = people.filter(function (element) {
+      if(element.parents.length === 0) {
+         return false; 
 
-      if(element.parents.length == 0) {
-        return false;
       }
-      else if(element.parents.length == 1 && parents.length == 1) {
-        if(element.parents[0] === parents[0].id) {
-          return true;
+      else if(element.parents.length >=1){    
+        
+        if(element.parents.id === person.parents.id ){
+          return true; 
         }
         else{
-          return false;
-        }
-      }
+          return false; 
+        }  
+         
+      }  
+  });
 
-    })
-  }
+  return siblings;   
 }
 
-function displayFamily(spouse, parents, siblings, person) {
+
+
+function displayFamily(spouse, parents, person, siblings) {
   if(spouse.gender == "male") {
     alert(`${person.firstName} ${person.lastName} husband is ${spouse.firstName} ${spouse.lastName}`)
   }
@@ -262,14 +263,14 @@ function displayFamily(spouse, parents, siblings, person) {
       alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} mother`)
     }
 })
-siblings.forEach(element => {
-  if(element.gender === "male") {
-    alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} brother`)
-  }
-  else{
-    alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} sister`)
-  }
-})
+  siblings.forEach(element => {
+    if(element.gender === "male") {
+     alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} brother`)
+   }
+    else{
+      alert(`${element.firstName} ${element.lastName} is ${person.firstName} ${person.lastName} sister`)
+    }
+}) 
 }
 
 
