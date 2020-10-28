@@ -191,7 +191,7 @@ function chars(input){
 }
 
 function findFamilyMembersOfPerson(person, people) {
-  let parents = findParentsOfPerson(person, People);
+  let parents = findParentsOfPerson(person, people);
   let spouse = findSpouseOfPerson(person, people);
   let siblings = findSiblingsOfPerson(person,people);
   displayFamily(spouse, parents, siblings);
@@ -212,14 +212,14 @@ function findParentsOfPerson(person, people) {
 
 function findSpouseOfPerson(person, people) {
   let spouse = people.filter(function (element) {
-    if(person.spouse[0] == element.id) {
+    if(person.currentSpouse == element.id) {
       return true;
     }
     else {
       return false;
     }
-  })
-  return spouse; 
+  }); 
+  return spouse[0]; 
 }
 
 function findSiblingsOfPerson(person, people) {
